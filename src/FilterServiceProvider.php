@@ -16,8 +16,8 @@ class FilterServiceProvider extends ServiceProvider
     public function boot()
     {
         Nova::serving(function (ServingNova $event) {
-            Nova::script('nested-tree-filter', __DIR__.'/../dist/js/filter.js');
-            Nova::style('nested-tree-filter', __DIR__.'/../dist/css/filter.css');
+            Nova::script('nested-tree-filter', __DIR__ . '/../dist/js/filter.js');
+            Nova::style('nested-tree-filter', __DIR__ . '/../dist/css/filter.css');
         });
     }
 

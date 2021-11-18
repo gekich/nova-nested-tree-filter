@@ -8,7 +8,6 @@ use Laravel\Nova\Filters\Filter;
 
 class NestedTreeFilter extends Filter
 {
-
     public function __construct()
     {
         $this->withMeta([
@@ -19,7 +18,6 @@ class NestedTreeFilter extends Filter
             'placeholder'   => $this->placeholder,
         ]);
     }
-
 
     /**
      * Multiple options select.
@@ -101,18 +99,18 @@ class NestedTreeFilter extends Filter
      */
     public function apply(Request $request, $query, $value)
     {
-        $decodedValues = Arr::wrap(json_decode($value, true));;
-        $nodes = $this->filterModel::find($decodedValues);
+        $filterSelected = json_decode($value, true);
+        $filteredModels = $this->filterModel::find($filterSelected);
 
-        $descendants = collect();
-        foreach ($nodes as $node) {
-            $descendants = $descendants->merge($node->descendants()->pluck($this->idKey));
-            $descendants = $descendants->merge($node->getKey());
+        $filteredAndDescendants = collect();
+        foreach ($filteredModels as $model) {
+            $filteredAndDescendants = $filteredAndDescendants->merge($model->descendants()->pluck($this->idKey));
+            $filteredAndDescendants = $filteredAndDescendants->merge($model->getKey());
         }
 
-        if ($descendants->isNotEmpty()) {
-            return $query->whereHas($this->filterRelation, function ($q) use ($descendants) {
-                $q->whereIn($this->idKey, $descendants);
+        if ($filteredAndDescendants->isNotEmpty()) {
+            return $query->whereHas($this->filterRelation, function ($q) use ($filteredAndDescendants) {
+                $q->whereIn($this->idKey, $filteredAndDescendants);
             });
         }
 
@@ -127,8 +125,6 @@ class NestedTreeFilter extends Filter
      */
     public function options(Request $request)
     {
-        $tree = $this->filterModel::get()->toTree()->toJson();
-
-        return $tree;
+        return $this->filterModel::get()->toTree()->toJson();
     }
 }
