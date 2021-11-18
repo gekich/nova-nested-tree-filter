@@ -1,13 +1,14 @@
 {
     "name": "gekich/nested-tree-filter",
-    "description": "A Laravel Nova filter.",
+    "description": "A Laravel Nova nested tree filter.",
     "keywords": [
         "laravel",
         "nova"
     ],
     "license": "MIT",
     "require": {
-        "php": ">=7.1.0"
+        "php": "^7.3|^8.0",
+        "kalnoy/nestedset": "^6.0"
     },
     "autoload": {
         "psr-4": {
