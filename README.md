@@ -7,7 +7,7 @@ custom nested tree filter for laravel nova.
 
 > This filter uses riophae/vue-treeselect under the hood 
 
-### Install
+## Install
 
 ```
 composer require gekich/nested-tree-filter
@@ -51,15 +51,19 @@ And multiple select option
     public $multiple = true;
 ```
 
-### Usage 
+## Usage 
 
 
 Filter is ready to use. You can apply this filter to filter to resource relation that set in ```$filterRelation```
 
 
-
-### Contributing
+## Contributing
 
 Feel free to suggest changes, ask for new features or fix bugs yourself. 
 
 Hope this package will be usefull for you.
+
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
